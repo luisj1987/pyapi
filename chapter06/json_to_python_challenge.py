@@ -9,6 +9,7 @@ def main():
         challengestring = challenge.read()
 
     challengedecoded = json.loads(challengestring )
+
     print(f"Full name: {challengedecoded[3]['name']}")
     print(f"Eye color: {challengedecoded[3]['eyeColor']}")
     print(f"Favorite Fruit: {challengedecoded[3]['favoriteFruit']}")
