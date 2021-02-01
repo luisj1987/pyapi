@@ -14,9 +14,9 @@ def main():
     y=(trial[2]['eyes'])
     z=(nightmare[0]['d'])
 
-    print (challenge[2][1])
-    print (trial[2]['eyes'])
-    print (nightmare[0]['d'])
+    print (x)
+    print (y)
+    print (z)
 
     print ("My "+x+"!"+" The "+y+" do "+z+"!")
 
