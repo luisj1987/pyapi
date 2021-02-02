@@ -16,8 +16,12 @@ def main():
     ## remove any "extra" new line feeds on our key
     nasacreds = "api_key=" + nasacreds.strip("\n")
 
+    inputdate = input("Please enter a date (YYYY-MM-DD):  " )
+    inputdate = "date="+inputdate
+    thumbs = "&thumbs=true"
+
     ## Call the webservice with our key
-    apodurlobj = urllib.request.urlopen(NASAAPI + nasacreds)
+    apodurlobj = urllib.request.urlopen(NASAAPI + nasacreds + "&" + inputdate + thumbs)
 
     ## read the file-like object
     apodread = apodurlobj.read()
@@ -26,8 +30,8 @@ def main():
     apod = json.loads(apodread.decode("utf-8"))
 
     ## display our Pythonic data
-    print("\n\nConverted Python data")
-    print(apod)
+    #print("\n\nConverted Python data")
+    #print(apod)
 
     print()
 
@@ -37,7 +41,10 @@ def main():
 
     print(apod["explanation"] + "\n")
 
-    print(apod["url"])
+    if "video" in apod["media_type"]:
+        print("Video Thumbnail: " + apod["thumbnail_url"])
+    else:
+        print("Image URL: " + apod["url"])
 
     ## Uncomment the code below if running in a GUI
     ## and you want to open the URL in a browser
