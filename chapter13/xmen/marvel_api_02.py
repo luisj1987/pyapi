@@ -36,6 +36,7 @@ def main():
     ## Provide user input to enter a hero name
     if args.hero == None:
         hero = input("Please enter the name of a character: ")
+        hero = hero.lower().replace(" ", "%20")
     else:
         hero = args.hero
 
