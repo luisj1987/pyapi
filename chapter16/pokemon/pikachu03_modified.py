@@ -11,7 +11,6 @@ import requests
 ## python3 -m pip install pandas
 import pandas
 
-#ITEMURL = "http://pokeapi.co/api/v2/item/"
 POKEMON = "http://pokeapi.co/api/v2/pokemon/"
 
 def main():
@@ -62,10 +61,5 @@ def main():
     print("Gotta catch 'em all!")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Pass in a word to search\
-    the Pokemon item API")
-    parser.add_argument('--searchword', metavar='SEARCHW',\
-    type=str, default='ball', help="Pass in any word. Default is 'ball'")
-    args = parser.parse_args()
     main()
 
