@@ -19,6 +19,7 @@ def marvelcharcall(stampystamp, hashyhash, pkeyz, lookmeup):
     r = requests.get(XAVIER+"?name="+lookmeup+"&ts="+stampystamp+"&apikey="+pkeyz+"&hash="+hashyhash)
 
     print(XAVIER+"?name="+lookmeup+"&ts="+stampystamp+"&apikey="+pkeyz+"&hash="+hashyhash)
+    print ("")
     return r.json()
 
     
@@ -32,6 +33,12 @@ def main():
     with open(args.pub) as munroe:
         storm = munroe.read().rstrip('\n')
     
+    ## Provide user input to enter a hero name
+    if args.hero == None:
+        hero = input("Please enter the name of a character: ")
+    else:
+        hero = args.hero
+
     ## create an integer from a float timestamp (for our RAND)
     nightcrawler = str(time.time()).rstrip('.')
     
@@ -39,10 +46,15 @@ def main():
     cerebro = hashbuilder(nightcrawler, beast, storm)
 
     ## call the API with marvelcharcall(timestamp, hash, publickey, character)
-    uncannyxmen = marvelcharcall(nightcrawler, cerebro, storm, args.hero)
-    
+    uncannyxmen = marvelcharcall(nightcrawler, cerebro, storm, hero)
     ## display results
-    print(uncannyxmen)
+    print ("")
+    print("Character's name: " + uncannyxmen["data"]["results"][0]["name"])
+    print("Description: " + uncannyxmen["data"]["results"][0]["description"])
+    print("Comics: " + str(uncannyxmen["data"]["results"][0]["comics"]["available"]))
+    print("Series: " + str(uncannyxmen["data"]["results"][0]["series"]["available"]))
+    print("Stories: " + str(uncannyxmen["data"]["results"][0]["stories"]["available"]))
+    print("Events: " + str(uncannyxmen["data"]["results"][0]["events"]["available"]))
 
 ## Define arguments to collect
 if __name__ == '__main__':
@@ -51,11 +63,9 @@ if __name__ == '__main__':
       containing Marvel private developer key')
     parser.add_argument('--pub', help='Provide the /path/to/file.pub \
       containing Marvel public developer key')
-
-    ## The line below is NEW! This allows us to pass the lookup character
-    hero = input("Please enter the name of a character: ")
-    parser.add_argument('--hero', default=hero,\
+    parser.add_argument('--hero', \
       help='Character to search for within the Marvel universe')
     args = parser.parse_args()
+
     main()
 
