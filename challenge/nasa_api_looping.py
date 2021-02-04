@@ -18,7 +18,7 @@ def main():
     #    print ()     
 
     #Challenge #3: Hardest
-    camera = input("Which camera would you like to see?" )
+    camera = input("Which camera would you like to see? ")
     all_cams= ["FHAZ","RHAZ","MAST","CHEMCAM","NAVCAM"]
     for roverdict in roverresp["photos"]:
         if roverdict["camera"]["name"] == camera:
